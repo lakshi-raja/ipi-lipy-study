@@ -1,0 +1,54 @@
+---
+interface Item {
+  ch: string;
+  title: string;
+  hint: string;
+  slug?: string;
+  refs?: string;
+  pending?: boolean;
+}
+interface Section {
+  label: string;
+  items: Item[];
+}
+const { sections } = Astro.props as { sections: Section[] };
+---
+<section class="ipi-landing">
+  <div class="ipi-landing__intro">
+    <div class="ipi-landing__eyebrow">Capitolo 2</div>
+    <h1 class="ipi-landing__title">Procedure Operative — PRO</h1>
+    <p class="ipi-landing__subtitle">
+      Sintesi operativa delle IPI ATS Ancona Falconara. Contenuti derivati dalla fonte autorevole
+      <em>IPI DIG ATS Ancona Falconara — Versione 1.000 (17-07-2026)</em>. Nessuna minima, condizione o valore numerico è stato omesso.
+    </p>
+    <div class="ipi-landing__meta">
+      <span>LIPY</span>
+      <span>Ancona Falconara</span>
+      <span>Versione 1.000 · 17-07-2026</span>
+    </div>
+  </div>
+
+  {sections.map((section) => (
+    <div class="ipi-landing__group">
+      <div class="ipi-landing__group-label">{section.label}</div>
+      <div class="ipi-landing__grid">
+        {section.items.map((item) => (
+          item.pending ? (
+            <div class={`ipi-card ipi-card--pending`} aria-disabled="true">
+              <div class="ipi-card__chapter">{item.ch}</div>
+              <div class="ipi-card__title">{item.title}</div>
+              <div class="ipi-card__hint">{item.hint}</div>
+            </div>
+          ) : (
+            <a class="ipi-card" href={`/${item.slug}/`}>
+              <div class="ipi-card__chapter">{item.ch}</div>
+              <div class="ipi-card__title">{item.title}</div>
+              <div class="ipi-card__hint">{item.hint}</div>
+              {item.refs && <div class="ipi-card__refs">{item.refs}</div>}
+            </a>
+          )
+        ))}
+      </div>
+    </div>
+  ))}
+</section>

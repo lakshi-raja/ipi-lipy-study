@@ -1,0 +1,109 @@
+/* Operational tables — wide matrices, sticky headers/columns, horizontal scroll */
+
+.sl-markdown-content table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.4;
+}
+
+/* Wrap tables so they can scroll horizontally without breaking layout */
+.sl-markdown-content .table-wrapper,
+.sl-markdown-content table {
+  margin: 1rem 0;
+}
+.sl-markdown-content .table-wrapper {
+  overflow-x: auto;
+  overflow-y: visible;
+  border: 1px solid var(--ipi-border);
+  border-radius: var(--ipi-radius);
+  background: var(--ipi-surface);
+  scrollbar-width: thin;
+  position: relative;
+}
+.sl-markdown-content .table-wrapper::before {
+  content: '← Scorri orizzontalmente →';
+  display: none;
+  position: sticky;
+  left: 0;
+  padding: .35rem .6rem;
+  font-size: 10.5px;
+  color: var(--ipi-muted);
+  font-family: var(--ipi-font-mono);
+  letter-spacing: .04em;
+  background: linear-gradient(to bottom, var(--ipi-surface), rgba(255,255,255,0));
+}
+.sl-markdown-content .table-wrapper.is-overflowing::before { display: block; }
+
+.sl-markdown-content .table-wrapper table {
+  margin: 0;
+  border: 0;
+  min-width: 100%;
+}
+
+.sl-markdown-content th,
+.sl-markdown-content td {
+  padding: .55rem .75rem;
+  border-bottom: 1px solid var(--ipi-border);
+  text-align: left;
+  vertical-align: top;
+  white-space: normal;
+}
+.sl-markdown-content th {
+  background: var(--ipi-sidebar);
+  color: var(--ipi-navy);
+  font-weight: 650;
+  font-size: 12.5px;
+  text-transform: none;
+  letter-spacing: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  border-bottom: 1px solid var(--ipi-border-strong);
+}
+
+.sl-markdown-content tr:nth-child(even) td { background: rgba(233, 239, 245, 0.35); }
+:root[data-theme='dark'] .sl-markdown-content tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+.sl-markdown-content tbody tr:hover td { background: var(--ipi-blue-soft); }
+
+/* Sticky first column for wide matrices (opt-in via wrapper flag) */
+.sl-markdown-content .table-wrapper.is-matrix table th:first-child,
+.sl-markdown-content .table-wrapper.is-matrix table td:first-child {
+  position: sticky;
+  left: 0;
+  background: var(--ipi-surface);
+  z-index: 2;
+  border-inline-end: 1px solid var(--ipi-border-strong);
+  font-weight: 600;
+  color: var(--ipi-navy);
+  box-shadow: 4px 0 4px -4px rgba(16,42,67,.15);
+}
+.sl-markdown-content .table-wrapper.is-matrix table thead th:first-child {
+  z-index: 3;
+  background: var(--ipi-sidebar);
+}
+.sl-markdown-content .table-wrapper.is-matrix tbody tr:nth-child(even) td:first-child {
+  background: #F1F5F9;
+}
+:root[data-theme='dark'] .sl-markdown-content .table-wrapper.is-matrix table th:first-child,
+:root[data-theme='dark'] .sl-markdown-content .table-wrapper.is-matrix table td:first-child {
+  background: var(--ipi-surface);
+}
+
+/* Semantic cell hints — content-based */
+.sl-markdown-content td:has(> strong):not(:first-child) {
+  color: var(--ipi-navy);
+}
+
+/* Words that carry operational meaning inside tables */
+.sl-markdown-content td strong { color: var(--ipi-navy); font-weight: 600; }
+
+/* Small screens: keep font readable, no shrink */
+@media (max-width: 640px) {
+  .sl-markdown-content table { font-size: 13.5px; }
+  .sl-markdown-content th, .sl-markdown-content td { padding: .5rem .6rem; }
+}

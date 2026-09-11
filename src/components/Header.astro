@@ -1,0 +1,26 @@
+---
+import Search from '@astrojs/starlight/components/Search.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
+
+const route: any = Astro.locals?.starlightRoute ?? {};
+const entry = route.entry ?? (Astro.props as any)?.entry;
+const chapter = entry?.data?.ipi?.chapter;
+const group = entry?.data?.ipi?.group;
+const chapterLabel = chapter && group ? `CAP. 2 · ${group}` : 'CAP. 2 — PROCEDURE OPERATIVE';
+---
+<div class="ipi-header">
+  <a href="/" class="ipi-header__brand" aria-label="IPI LIPY — home">
+    <span class="ipi-header__mark" aria-hidden="true">L Y</span>
+    <span>
+      <span class="ipi-header__name">IPI LIPY</span><br />
+      <span class="ipi-header__location">Ancona Falconara</span>
+    </span>
+  </a>
+  <span class="ipi-header__chapter">{chapterLabel}</span>
+  <div class="ipi-header__search"><Search /></div>
+  <div class="ipi-header__actions">
+    <ThemeSelect />
+    <SocialIcons />
+  </div>
+</div>

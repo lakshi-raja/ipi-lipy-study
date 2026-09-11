@@ -1,0 +1,26 @@
+---
+const route: any = Astro.locals?.starlightRoute ?? {};
+const pagination = route.pagination ?? (Astro.props as any)?.pagination;
+const prev = pagination?.prev;
+const next = pagination?.next;
+function chapterOf(href = '') {
+  const m = href.match(/\/(\d{2})-/);
+  return m ? m[1] : '';
+}
+---
+{(prev || next) && (
+  <nav class="ipi-pagination" aria-label="Navigazione capitoli">
+    {prev ? (
+      <a href={prev.href} class="ipi-pagination__prev">
+        <span class="ipi-pagination__dir">← {chapterOf(prev.href) || 'Precedente'}</span>
+        <span class="ipi-pagination__title">{prev.label}</span>
+      </a>
+    ) : <span />}
+    {next ? (
+      <a href={next.href} class="ipi-pagination__next">
+        <span class="ipi-pagination__dir">{chapterOf(next.href) || 'Successivo'} →</span>
+        <span class="ipi-pagination__title">{next.label}</span>
+      </a>
+    ) : <span />}
+  </nav>
+)}
