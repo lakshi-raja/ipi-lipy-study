@@ -1,201 +1,163 @@
-/* Base typography and page frame — fonts bundled via @fontsource (see src/styles/fonts.css) */
-html { font-feature-settings: 'ss01', 'cv11', 'tnum'; }
+/* Base typography + page frame */
+
+html {
+  font-feature-settings: 'ss01', 'cv11', 'tnum';
+  color-scheme: light;
+}
+:root[data-theme='dark'] html { color-scheme: dark; }
+
 body {
-  font-family: var(--ipi-font-sans);
-  background: var(--ipi-bg);
+  font-family: var(--ipi-font-text);
+  background: var(--ipi-page);
   color: var(--ipi-text);
   -webkit-font-smoothing: antialiased;
 }
 
-/* Content typography */
+/* Article content ---------------------------------------------------------- */
 .sl-markdown-content {
-  font-size: 15.5px;
-  line-height: 1.6;
+  font-family: var(--ipi-font-text);
+  font-size: 16px;
+  line-height: 1.65;
   color: var(--ipi-text);
 }
+
+/* Headings: Poppins, never Orbitron */
 .sl-markdown-content :is(h1, h2, h3, h4, h5, h6) {
-  color: var(--ipi-navy);
+  font-family: var(--ipi-font-ui);
+  color: var(--ipi-text);
   letter-spacing: -0.005em;
-  font-feature-settings: 'ss01';
 }
-.sl-markdown-content > h1:first-child { display: none; } /* PageTitle covers it */
-.sl-markdown-content h1 { font-size: clamp(1.5rem, 2.1vw, 1.75rem); font-weight: 700; margin-top: 2.25rem; }
-.sl-markdown-content h2 { font-size: clamp(1.15rem, 1.5vw, 1.35rem); font-weight: 650; margin-top: 2rem; padding-bottom: .35rem; border-bottom: 1px solid var(--ipi-border); }
-.sl-markdown-content h3 { font-size: 1.05rem; font-weight: 650; margin-top: 1.5rem; color: var(--ipi-text); }
-.sl-markdown-content h4 { font-size: .95rem; font-weight: 650; text-transform: uppercase; letter-spacing: .04em; color: var(--ipi-text-secondary); margin-top: 1.25rem; }
+
+/* First H1 in the source is duplicated by the PageTitle component */
+.sl-markdown-content > h1:first-child { display: none; }
+
+.sl-markdown-content h1 {
+  font-size: clamp(1.5rem, 2vw, 1.75rem);
+  font-weight: 700;
+  margin-top: 2.25rem;
+}
+.sl-markdown-content h2 {
+  font-size: clamp(1.25rem, 1.7vw, 1.5rem);
+  font-weight: 600;
+  margin-top: 2rem;
+  padding-left: 12px;
+  border-left: 3px solid var(--ipi-red);
+  line-height: 1.25;
+}
+.sl-markdown-content h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  color: var(--ipi-text);
+}
+.sl-markdown-content h4 {
+  font-size: .9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--ipi-text-muted);
+  margin-top: 1.25rem;
+}
 
 .sl-markdown-content p { margin: .75rem 0; }
-.sl-markdown-content strong { color: var(--ipi-navy); font-weight: 600; }
+.sl-markdown-content strong { color: var(--ipi-text); font-weight: 600; }
 .sl-markdown-content :is(ul, ol) { padding-inline-start: 1.35rem; }
 .sl-markdown-content li { margin: .2rem 0; }
 
+/* Links inside content — brand red */
 .sl-markdown-content a {
-  color: var(--ipi-blue);
+  color: var(--ipi-red-hover);
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
+  transition: color .15s ease;
+}
+.sl-markdown-content a:hover {
+  color: var(--ipi-red);
+  text-decoration: underline;
 }
 
+/* Inline code / mono */
 .sl-markdown-content code:not(pre code) {
   font-family: var(--ipi-font-mono);
   font-size: .88em;
-  padding: .1em .35em;
+  padding: .12em .36em;
   background: var(--sl-color-bg-inline-code);
   border-radius: 4px;
+  color: var(--ipi-text);
 }
+
 .sl-markdown-content hr {
   border: 0;
   border-top: 1px solid var(--ipi-border);
   margin: 1.75rem 0;
 }
 
-/* Numeric emphasis — H1s that only contain numeric/technical content used as callouts in source */
+/* Source-level H1s used as inline callouts (e.g. `# **440.725 MHz**`) */
 .sl-markdown-content h1:not(:first-child) {
-  background: var(--ipi-blue-soft);
-  color: var(--ipi-navy);
-  border-left: 3px solid var(--ipi-blue);
+  font-family: var(--ipi-font-mono);
+  background: var(--ipi-surface-subtle);
+  color: var(--ipi-text);
+  border-left: 3px solid var(--ipi-red);
   padding: .5rem .8rem;
-  font-size: 1.05rem;
-  font-weight: 650;
+  font-size: 1rem;
+  font-weight: 600;
   border-radius: 0 var(--ipi-radius-sm) var(--ipi-radius-sm) 0;
   margin-top: 1.25rem;
   letter-spacing: 0;
 }
-/* Section-defining H1s (those starting with a §-style code) — keep as normal headings */
+/* Real section H1s (IDs beginning with `2-` from § refs) remain proper section headings */
 .sl-markdown-content h1[id^="2-"] {
+  font-family: var(--ipi-font-ui);
   background: transparent;
   border-left: 0;
   padding: 0;
-  color: var(--ipi-navy);
-  font-size: clamp(1.5rem, 2.1vw, 1.75rem);
+  color: var(--ipi-text);
+  font-size: clamp(1.5rem, 2vw, 1.75rem);
   font-weight: 700;
   margin-top: 2.5rem;
   letter-spacing: -0.005em;
 }
 
-/* Blockquotes = operational rule */
+/* Blockquote = REGOLA OPERATIVA */
 .sl-markdown-content blockquote {
-  border-left: 3px solid var(--ipi-blue);
-  background: var(--ipi-blue-soft);
-  color: var(--ipi-navy);
+  border-left: 3px solid var(--ipi-red);
+  background: var(--ipi-page);
+  color: var(--ipi-text);
   margin: 1rem 0;
-  padding: .65rem .9rem;
+  padding: .7rem .9rem;
   border-radius: 0 var(--ipi-radius-sm) var(--ipi-radius-sm) 0;
   font-style: normal;
+}
+:root[data-theme='dark'] .sl-markdown-content blockquote {
+  background: var(--ipi-surface-subtle);
 }
 .sl-markdown-content blockquote::before {
   content: 'REGOLA OPERATIVA';
   display: block;
-  font-size: 11px;
-  font-weight: 700;
+  font-family: var(--ipi-font-ui);
+  font-size: 10px;
+  font-weight: 600;
   letter-spacing: .08em;
-  color: var(--ipi-blue);
-  margin-bottom: .25rem;
+  color: var(--ipi-red-hover);
+  text-transform: uppercase;
+  margin-bottom: .35rem;
 }
 .sl-markdown-content blockquote p { margin: .15rem 0; }
 
-/* Frequencies / numeric identifiers rendered as bold+MHz-style get monospace polish */
-.sl-markdown-content strong:has(+ *) { /* fallback in unsupported UAs is fine */ }
-
-/* Layout tune */
-.main-frame { background: var(--ipi-bg); }
-.sl-container { max-width: var(--sl-content-width); }
-
-/* Sidebar refinement */
-starlight-menu-button { border-radius: var(--ipi-radius-sm); }
-.sidebar-pane {
-  background: var(--ipi-sidebar);
-  border-inline-end: 1px solid var(--ipi-border);
-}
-.sidebar-content ul.top-level > li > details > summary,
-.sidebar-content ul.top-level > li > a,
-.sidebar-content ul.top-level > li > span.large {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .09em;
-  text-transform: uppercase;
-  color: var(--ipi-muted);
-  padding: .5rem .5rem .35rem;
-}
-.sidebar-content ul ul a {
-  padding: .35rem .55rem;
-  border-radius: var(--ipi-radius-sm);
-  color: var(--ipi-text-secondary);
-  font-size: 13.5px;
-  border-inline-start: 2px solid transparent;
-  transition: background .12s ease, color .12s ease;
-}
-.sidebar-content ul ul a:hover {
-  background: var(--ipi-surface);
-  color: var(--ipi-text);
-}
-.sidebar-content ul ul a[aria-current='page'] {
-  background: var(--ipi-blue-soft);
-  color: var(--ipi-navy);
-  font-weight: 600;
-  border-inline-start-color: var(--ipi-blue);
-}
-.sidebar-content ul ul a[data-pending='true'] {
-  color: var(--ipi-muted);
-  pointer-events: none;
-  opacity: .55;
-}
-.sidebar-content ul ul a[data-pending='true']::after {
-  content: 'in preparazione';
-  display: inline-block;
-  margin-inline-start: .4rem;
-  font-size: 10px;
-  color: var(--ipi-muted);
-  border: 1px solid var(--ipi-border);
-  border-radius: 3px;
-  padding: 0 .25rem;
-}
-
-/* Right-side TOC */
-.right-sidebar-panel h2 {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--ipi-muted);
-}
-.right-sidebar-panel h2::before { content: 'IN QUESTA PAGINA'; }
-.right-sidebar-panel h2 span { display: none; }
-.right-sidebar-panel a {
-  font-size: 13px;
-  color: var(--ipi-text-secondary);
-  padding: .25rem .5rem;
-  border-inline-start: 2px solid transparent;
-  border-radius: 0;
-}
-.right-sidebar-panel a:hover { color: var(--ipi-text); }
-.right-sidebar-panel a[aria-current='true'] {
-  color: var(--ipi-navy);
-  font-weight: 600;
-  border-inline-start-color: var(--ipi-blue);
-  background: transparent;
-}
-
-/* Search button */
-site-search button {
-  border: 1px solid var(--ipi-border);
-  background: var(--ipi-surface);
-  border-radius: var(--ipi-radius);
-  color: var(--ipi-text-secondary);
-}
-site-search button:hover { border-color: var(--ipi-border-strong); }
-
-/* Mobile TOC toggle */
-starlight-toc summary {
-  background: var(--ipi-surface);
-  border: 1px solid var(--ipi-border);
-  border-radius: var(--ipi-radius-sm);
-  padding: .5rem .75rem;
-  font-size: 13.5px;
-  color: var(--ipi-text);
-}
+/* Numeric emphasis: tabular figures everywhere strong text appears */
+.sl-markdown-content strong { font-variant-numeric: tabular-nums; }
 
 /* Focus */
 :focus-visible {
-  outline: 2px solid var(--ipi-blue);
+  outline: 2px solid var(--ipi-red);
   outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+  }
 }

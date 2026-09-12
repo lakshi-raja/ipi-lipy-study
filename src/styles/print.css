@@ -1,7 +1,14 @@
 @media print {
   @page { margin: 18mm 14mm; }
 
-  html, body { background: #fff; color: #000; }
+  :root, :root[data-theme='dark'] {
+    --ipi-page: #FFFFFF;
+    --ipi-surface: #FFFFFF;
+    --ipi-text: #000000;
+    --ipi-text-muted: #444;
+    --ipi-border: #CCC;
+  }
+  html, body { background: #fff !important; color: #000 !important; }
 
   /* Hide chrome */
   header.header,
@@ -9,52 +16,69 @@
   .right-sidebar,
   starlight-menu-button,
   starlight-toc,
+  mobile-starlight-toc,
   site-search,
   .social-icons,
   .ipi-header,
   .ipi-pagination,
   #starlight__mobile-toc { display: none !important; }
 
-  .main-frame,
-  .main-pane,
-  main {
+  .main-frame, .main-pane, main {
     display: block !important;
     grid-template-columns: none !important;
+    background: #fff !important;
   }
   .sl-container { max-width: 100% !important; padding: 0 !important; }
 
   .sl-markdown-content {
     font-size: 11pt;
-    line-height: 1.4;
+    line-height: 1.45;
     color: #000;
   }
-  .sl-markdown-content h1,
-  .sl-markdown-content h2 {
+  .sl-markdown-content :is(h1, h2, h3) {
     page-break-after: avoid;
-    color: #000;
+    color: #000 !important;
     background: none !important;
-    border-left: 0 !important;
-    padding-left: 0 !important;
   }
+  .sl-markdown-content h2 { border-left: 2pt solid #000 !important; padding-left: 6pt !important; }
   .sl-markdown-content h1:not([id^="2-"]) {
-    font-family: var(--ipi-font-mono);
+    font-family: 'IBM Plex Mono', monospace !important;
     background: #f2f2f2 !important;
     border: 1px solid #ccc !important;
     padding: 4pt 6pt !important;
   }
-  .sl-markdown-content table { page-break-inside: avoid; }
   .sl-markdown-content blockquote {
     background: #fafafa !important;
-    border-left: 2px solid #444 !important;
+    border-left: 2pt solid #000 !important;
     color: #000 !important;
   }
-  .sl-markdown-content blockquote::before { color: #444 !important; }
+  .sl-markdown-content blockquote::before { color: #000 !important; }
+
+  .sl-markdown-content table { page-break-inside: avoid; border-collapse: collapse; }
+  .sl-markdown-content thead th {
+    background: #f0f0f0 !important;
+    color: #000 !important;
+    border-bottom: 1pt solid #000 !important;
+  }
+  .sl-markdown-content .table-wrapper { border: 1px solid #999 !important; overflow: visible !important; }
+
+  /* Landing hero flattens */
+  .ipi-landing__hero {
+    background: #fff !important;
+    color: #000 !important;
+    padding: 0 !important;
+    border-bottom: 1pt solid #000;
+    margin-bottom: 12pt;
+  }
+  .ipi-landing__eyebrow, .ipi-landing__title { color: #000 !important; }
+  .ipi-landing__meta { color: #444 !important; }
 
   .ipi-page-header {
     border-bottom: 1pt solid #000;
     margin-bottom: 12pt;
   }
-  .ipi-page-header__num { color: #000 !important; }
+  .ipi-page-header__num,
+  .ipi-page-header__title { color: #000 !important; }
 
   a { color: #000; text-decoration: none; }
 }

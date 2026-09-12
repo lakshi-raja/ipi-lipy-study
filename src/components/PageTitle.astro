@@ -8,21 +8,22 @@ const refs = ipi?.refs ?? '';
 const title = entry?.data?.title ?? '';
 ---
 <header class="ipi-page-header">
+  {group && <div class="ipi-page-header__group">{group}</div>}
   {chapter && <div class="ipi-page-header__num">{chapter}</div>}
-  <div class="ipi-page-header__group">{group}</div>
   <h1 class="ipi-page-header__title" id="_top">{title}</h1>
   {refs && <div class="ipi-page-header__refs">{refs}</div>}
 </header>
+
 <script>
-  // Wrap all tables in a scroll container + flag matrices; runs client-side.
-  const enhance = () => {
-    document.querySelectorAll('.sl-markdown-content table').forEach((table) => {
+  // Wrap tables in a scroll container + flag wide matrices for sticky-column treatment.
+  const enhanceTables = () => {
+    document.querySelectorAll<HTMLTableElement>('.sl-markdown-content table').forEach((table) => {
       if (table.parentElement?.classList.contains('table-wrapper')) return;
       const wrap = document.createElement('div');
       wrap.className = 'table-wrapper';
       const headerCells = table.tHead?.rows?.[0]?.cells?.length ?? 0;
       if (headerCells >= 5) wrap.classList.add('is-matrix');
-      table.parentElement.insertBefore(wrap, table);
+      table.parentElement?.insertBefore(wrap, table);
       wrap.appendChild(table);
       const check = () => {
         if (wrap.scrollWidth > wrap.clientWidth + 2) wrap.classList.add('is-overflowing');
@@ -32,6 +33,6 @@ const title = entry?.data?.title ?? '';
       new ResizeObserver(check).observe(wrap);
     });
   };
-  enhance();
-  document.addEventListener('astro:page-load', enhance);
+  enhanceTables();
+  document.addEventListener('astro:page-load', enhanceTables);
 </script>

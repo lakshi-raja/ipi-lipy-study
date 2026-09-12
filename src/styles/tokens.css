@@ -1,128 +1,153 @@
-/* IPI LIPY — Operational design tokens */
+/* IPI LIPY — Dark Aviation Operations Manual — design tokens */
+
 :root {
-  --ipi-bg:              #F7F9FB;
+  /* Shell */
+  --ipi-black:         #000000;
+  --ipi-black-soft:    #0D0F12;
+  --ipi-black-surface: #111316;
+  --ipi-black-elev:    #17191D;
+
+  /* Reading surfaces */
+  --ipi-white:           #FFFFFF;
+  --ipi-page:            #F8F8F7;
   --ipi-surface:         #FFFFFF;
-  --ipi-sidebar:         #F1F4F7;
+  --ipi-surface-subtle:  #F5F6F7;
 
-  --ipi-text:            #142033;
-  --ipi-text-secondary:  #5F6B7A;
-  --ipi-muted:           #7B8794;
+  /* Brand red — navigation, chapter numbers, brand accents */
+  --ipi-red:        #E83020;
+  --ipi-red-bright: #FB3625;
+  --ipi-red-hover:  #C9261A;
+  --ipi-red-soft:   #FFF0EE;
 
-  --ipi-navy:            #102A43;
-  --ipi-blue:            #1769AA;
-  --ipi-blue-soft:       #EAF3FA;
+  /* Text */
+  --ipi-text:            #111214;
+  --ipi-text-secondary:  #62666D;
+  --ipi-text-muted:      #737880;
 
-  --ipi-border:          #DCE3EA;
-  --ipi-border-strong:   #C6D0DA;
+  /* Text on dark shell */
+  --ipi-on-dark:         #F4F4F4;
+  --ipi-on-dark-muted:   #A0A3A8;
+  --ipi-on-dark-faint:   rgba(255,255,255,.55);
 
-  --ipi-warning:         #A96510;
-  --ipi-warning-bg:      #FFF7E8;
+  /* Borders */
+  --ipi-border:      #E4E5E7;
+  --ipi-border-soft: #ECEDF0;
+  --ipi-border-dark: #2C2E32;
 
-  --ipi-danger:          #B42318;
-  --ipi-danger-bg:       #FFF0EE;
+  /* Semantic (operational) */
+  --ipi-warning:       #B26A00;
+  --ipi-warning-soft:  #FFF4DE;
+  --ipi-critical:      #B42318;
+  --ipi-critical-soft: #FFF0EE;
+  --ipi-success:       #207A4B;
+  --ipi-success-soft:  #EDF8F1;
 
-  --ipi-success:         #207A4B;
-  --ipi-success-bg:      #EDF8F1;
-
+  /* Radii */
   --ipi-radius-sm: 6px;
   --ipi-radius:    8px;
   --ipi-radius-lg: 10px;
 
-  --ipi-shadow-1: 0 1px 0 rgba(16, 42, 67, 0.04);
-  --ipi-shadow-2: 0 1px 2px rgba(16, 42, 67, 0.06), 0 2px 4px rgba(16, 42, 67, 0.04);
+  /* Shadows */
+  --ipi-shadow-none: none;
+  --ipi-shadow-1:    0 1px 0 rgba(0, 0, 0, 0.04);
+  --ipi-shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.05);
+  --ipi-shadow-drawer: 0 24px 60px rgba(0, 0, 0, 0.45);
+  --ipi-shadow-sticky: 5px 0 8px -7px rgba(0, 0, 0, 0.35);
 
-  --ipi-font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --ipi-font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  /* Fonts */
+  --ipi-font-brand: 'Orbitron', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --ipi-font-ui:    'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ipi-font-text:  'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ipi-font-mono:  'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
-  /* Bridge Starlight tokens → IPI palette (light) */
+  /* Bridge Starlight tokens → IPI palette (light default) */
   --sl-color-white: var(--ipi-text);
-  --sl-color-gray-1: #1F2A3A;
-  --sl-color-gray-2: #35424F;
+  --sl-color-gray-1: #1E2024;
+  --sl-color-gray-2: #35383E;
   --sl-color-gray-3: var(--ipi-text-secondary);
-  --sl-color-gray-4: var(--ipi-muted);
-  --sl-color-gray-5: #B7C1CB;
-  --sl-color-gray-6: var(--ipi-border-strong);
-  --sl-color-gray-7: var(--ipi-border);
-  --sl-color-black: var(--ipi-bg);
+  --sl-color-gray-4: var(--ipi-text-muted);
+  --sl-color-gray-5: #B7BABE;
+  --sl-color-gray-6: var(--ipi-border);
+  --sl-color-gray-7: var(--ipi-border-soft);
+  --sl-color-black: var(--ipi-page);
 
-  --sl-color-accent:      var(--ipi-blue);
-  --sl-color-accent-high: var(--ipi-navy);
-  --sl-color-accent-low:  var(--ipi-blue-soft);
-  --sl-color-text-accent: var(--ipi-blue);
+  --sl-color-accent:      var(--ipi-red);
+  --sl-color-accent-high: var(--ipi-red-hover);
+  --sl-color-accent-low:  var(--ipi-red-soft);
+  --sl-color-text-accent: var(--ipi-red);
 
-  --sl-color-bg:          var(--ipi-bg);
-  --sl-color-bg-nav:      var(--ipi-surface);
-  --sl-color-bg-sidebar:  var(--ipi-sidebar);
-  --sl-color-bg-inline-code: #EEF2F6;
-  --sl-color-hairline:    var(--ipi-border);
-  --sl-color-hairline-shade: var(--ipi-border);
+  --sl-color-bg:            var(--ipi-page);
+  --sl-color-bg-nav:        var(--ipi-black);
+  --sl-color-bg-sidebar:    var(--ipi-black-soft);
+  --sl-color-bg-inline-code: #EDEEF0;
+  --sl-color-hairline:       var(--ipi-border);
+  --sl-color-hairline-shade: var(--ipi-border-soft);
   --sl-color-hairline-light: var(--ipi-border);
 
   --sl-color-text:         var(--ipi-text);
-  --sl-color-text-invert:  #FFFFFF;
+  --sl-color-text-invert:  var(--ipi-white);
 
-  --sl-font: var(--ipi-font-sans);
+  --sl-font:      var(--ipi-font-ui);
   --sl-font-mono: var(--ipi-font-mono);
 
-  --sl-text-body:   15.5px;
+  --sl-text-body:    16px;
   --sl-text-body-sm: 13px;
-  --sl-line-height: 1.6;
+  --sl-line-height:  1.65;
 
   --sl-content-width: 52rem;
-  --sl-content-pad-x: 1.25rem;
+  --sl-content-pad-x: 1.125rem;
 
-  --sl-nav-height: 60px;
-  --sl-nav-pad-x:  1rem;
-  --sl-sidebar-width: 17.5rem;
-  --sl-sidebar-pad-x: 1rem;
+  --sl-nav-height:      64px;
+  --sl-nav-pad-x:       1rem;
+  --sl-sidebar-width:   17.5rem;
+  --sl-sidebar-pad-x:   0.75rem;
+
+  --sl-color-bg-tab-bar: var(--ipi-black-soft);
 }
 
-/* Dark mode — real palette, not inverted */
+/* Compact mobile header height */
+@media (max-width: 50rem) {
+  :root { --sl-nav-height: 56px; }
+}
+
+/* Dark mode — real dark shell, not inverted */
 :root[data-theme='dark'] {
-  --ipi-bg:              #0B131F;
-  --ipi-surface:         #10192A;
-  --ipi-sidebar:         #0E1727;
+  --ipi-page:            #000000;
+  --ipi-surface:         #111316;
+  --ipi-surface-subtle:  #17191D;
 
-  --ipi-text:            #E7EDF3;
-  --ipi-text-secondary:  #A6B2BF;
-  --ipi-muted:           #7B8794;
+  --ipi-text:            #F4F4F4;
+  --ipi-text-secondary:  #B7BABE;
+  --ipi-text-muted:      #A0A3A8;
 
-  --ipi-navy:            #E7EDF3;
-  --ipi-blue:            #6FB0DF;
-  --ipi-blue-soft:       #16283C;
+  --ipi-border:          #2C2E32;
+  --ipi-border-soft:     #1D1F23;
 
-  --ipi-border:          #1E2A3E;
-  --ipi-border-strong:   #2A3A54;
-
-  --ipi-warning:         #E0A653;
-  --ipi-warning-bg:      #2A1F0F;
-
-  --ipi-danger:          #E58176;
-  --ipi-danger-bg:       #2A1512;
-
-  --ipi-success:         #6FBF92;
-  --ipi-success-bg:      #12251C;
+  --ipi-red-soft:        #2A100E;
+  --ipi-warning-soft:    #2A1F0F;
+  --ipi-critical-soft:   #2A1210;
+  --ipi-success-soft:    #10251A;
 
   --sl-color-white: var(--ipi-text);
-  --sl-color-gray-1: #D2DAE3;
-  --sl-color-gray-2: #B6C1CE;
+  --sl-color-gray-1: #D0D3D8;
+  --sl-color-gray-2: #B7BABE;
   --sl-color-gray-3: var(--ipi-text-secondary);
-  --sl-color-gray-4: var(--ipi-muted);
-  --sl-color-gray-5: #4C5A70;
-  --sl-color-gray-6: var(--ipi-border-strong);
-  --sl-color-gray-7: var(--ipi-border);
-  --sl-color-black: var(--ipi-bg);
+  --sl-color-gray-4: var(--ipi-text-muted);
+  --sl-color-gray-5: #4B4E54;
+  --sl-color-gray-6: var(--ipi-border);
+  --sl-color-gray-7: var(--ipi-border-soft);
+  --sl-color-black: var(--ipi-page);
 
-  --sl-color-bg:         var(--ipi-bg);
-  --sl-color-bg-nav:     var(--ipi-surface);
-  --sl-color-bg-sidebar: var(--ipi-sidebar);
-  --sl-color-bg-inline-code: #1A2233;
-  --sl-color-hairline:   var(--ipi-border);
+  --sl-color-bg:            var(--ipi-page);
+  --sl-color-bg-nav:        var(--ipi-black);
+  --sl-color-bg-sidebar:    var(--ipi-black-soft);
+  --sl-color-bg-inline-code: #1D1F23;
+  --sl-color-hairline:       var(--ipi-border);
   --sl-color-hairline-shade: var(--ipi-border);
   --sl-color-hairline-light: var(--ipi-border);
 
-  --sl-color-accent:      var(--ipi-blue);
-  --sl-color-accent-high: #C7D4E1;
-  --sl-color-accent-low:  var(--ipi-blue-soft);
-  --sl-color-text-accent: var(--ipi-blue);
+  --sl-color-accent:      var(--ipi-red);
+  --sl-color-accent-high: #F8F9FA;
+  --sl-color-accent-low:  var(--ipi-red-soft);
+  --sl-color-text-accent: var(--ipi-red-bright);
 }

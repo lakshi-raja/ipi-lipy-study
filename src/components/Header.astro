@@ -11,9 +11,9 @@ const chapterLabel = chapter && group ? `CAP. 2 · ${group}` : 'CAP. 2 — PROCE
 ---
 <div class="ipi-header">
   <a href="/" class="ipi-header__brand" aria-label="IPI LIPY — home">
-    <span class="ipi-header__mark" aria-hidden="true">L Y</span>
-    <span>
-      <span class="ipi-header__name">IPI LIPY</span><br />
+    <span class="ipi-header__mark" aria-hidden="true">LY</span>
+    <span class="ipi-header__brandtext">
+      <span class="ipi-header__name">IPI LIPY</span>
       <span class="ipi-header__location">Ancona Falconara</span>
     </span>
   </a>
@@ -24,3 +24,19 @@ const chapterLabel = chapter && group ? `CAP. 2 · ${group}` : 'CAP. 2 — PROCE
     <SocialIcons />
   </div>
 </div>
+
+<script>
+  // Sidebar: split "NN · Title" nav labels into a mono red badge + Poppins title.
+  const decorateSidebar = () => {
+    document.querySelectorAll<HTMLAnchorElement>('.sidebar-content ul ul a').forEach((a) => {
+      if (a.dataset.ipiDecorated) return;
+      const raw = a.textContent?.trim() ?? '';
+      const m = raw.match(/^(\d{2})\s*[·\-—]\s*(.+)$/);
+      if (!m) return;
+      a.innerHTML = `<span class="ipi-nav-num">${m[1]}</span><span class="ipi-nav-title">${m[2]}</span>`;
+      a.dataset.ipiDecorated = '1';
+    });
+  };
+  decorateSidebar();
+  document.addEventListener('astro:page-load', decorateSidebar);
+</script>
